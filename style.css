@@ -1,0 +1,563 @@
+/* style.css - ฉบับปรับปรุงล่าสุด */
+
+/* ==============================
+   พื้นฐานและ Body
+   ============================== */
+   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* ทำให้การเลื่อนด้วย #link นุ่มนวล */
+}
+
+body {
+    font-family: 'Tahoma', 'Kanit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.7;
+    color: #343a40;
+    background-color: #fff;
+    position: relative;
+    overflow-x: hidden; /* ป้องกัน scroll แนวนอนจาก sidebar */
+}
+
+/* ==============================
+   Sidebar Navigation & Overlay
+   ============================== */
+.sidebar-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px; /* ขยายเล็กน้อย */
+    height: 100vh;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1100; /* อยู่บนสุด */
+    padding-top: 15px;
+    box-shadow: 3px 0 6px rgba(0,0,0,0.1); /* เงาชัดขึ้น */
+}
+
+.sidebar-nav.is-open {
+    transform: translateX(0);
+}
+
+.menu-header {
+    font-weight: 600;
+    padding: 12px 20px;
+    font-size: 1.15rem;
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #495057;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    border-bottom: 1px solid #e9ecef;
+}
+.sidebar-nav li:last-child {
+    border-bottom: none;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 13px 25px; /* เพิ่ม padding */
+    text-decoration: none;
+    color: #495057;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a:focus { /* เพิ่ม focus state */
+    background-color: #e9ecef;
+    color: #0056b3;
+    outline: none; /* เอา outline เริ่มต้นออก */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* เข้มขึ้นอีก */
+    z-index: 1050; /* ต่ำกว่า sidebar */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==============================
+   Main Container & Header
+   ============================== */
+.main-container {
+    padding-left: 0;
+    transition: padding-left 0.3s ease-in-out; /* หากต้องการให้เนื้อหาขยับ */
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #ffffff;
+    min-height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* เพิ่มเงาเล็กน้อยให้ header */
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-right: 20px;
+    color: #343a40;
+    padding: 5px;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+.menu-toggle:hover {
+    color: #007bff;
+}
+
+.site-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-right: auto;
+    letter-spacing: 2px;
+    color: #212529;
+    white-space: nowrap; /* ไม่ให้ชื่อเว็บตัดบรรทัด */
+}
+
+.header-image-placeholder {
+    width: 110px;
+    height: 55px;
+    margin-left: 20px;
+    flex-shrink: 0; /* ไม่ให้หดเมื่อพื้นที่น้อย */
+}
+
+/* ==============================
+   Placeholder Box Style
+   ============================== */
+.placeholder-box {
+    border: 2px dashed #ced4da;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+    border-radius: 4px;
+}
+.placeholder-box span {
+    opacity: 0.8;
+}
+
+
+/* ==============================
+   General Content & Headings
+   ============================== */
+.site-content {
+    padding: 50px 30px; /* เพิ่ม padding */
+    max-width: 1140px; /* กว้างขึ้นเล็กน้อย */
+    margin: 0 auto;
+}
+
+.content-section {
+    margin-bottom: 60px;
+    padding-top: 10px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 35px; /* เพิ่มระยะห่าง */
+    font-weight: 600;
+    color: #343a40;
+    border-bottom: 2px solid #007bff; /* เปลี่ยนสีเส้นใต้เป็นสี primary */
+    padding-bottom: 12px;
+    width: 100%;
+}
+
+h3 {
+    font-size: 1.6rem; /* ใหญ่ขึ้น */
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.line {
+    height: 1px;
+    background-color: #e0e0e0; /* สีจางลง */
+    margin: 20px 0; /* เพิ่มระยะห่าง */
+    width: 100%;
+}
+
+/* ==============================
+   Intro Text Section
+   ============================== */
+.intro-text {
+    border-bottom: none;
+    margin-bottom: 60px; /* เพิ่มระยะห่าง */
+    padding-top: 0;
+    text-align: center;
+}
+.intro-text p {
+    font-size: 1.1rem;
+    color: #495057; /* ปรับสีให้อ่านง่าย */
+    margin-bottom: 20px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.intro-text .quote {
+    font-style: italic;
+    font-weight: 500;
+    color: #0056b3; /* สีเข้มขึ้น */
+    margin-top: 30px;
+    font-size: 1.25rem; /* ใหญ่ขึ้นเล็กน้อย */
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    display: inline-block;
+}
+
+/* ==============================
+   All Products Section
+   ============================== */
+#all-products h2 { /* ไม่ต้องมีเส้นใต้ h2 ถ้า section มี item ย่อยๆ */
+     /* border-bottom: none; */
+     /* padding-bottom: 0; */
+}
+
+.product-item {
+    margin-bottom: 45px;
+    padding-bottom: 25px;
+    border-bottom: 1px dashed #dee2e6; /* เส้นประชัดขึ้น */
+}
+.product-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0; /* item สุดท้ายไม่มี margin ล่าง */
+}
+
+.product-description {
+    color: #6c757d;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.image-gallery {
+    display: flex;
+    gap: 20px; /* เพิ่ม gap */
+    flex-wrap: wrap;
+}
+
+.gallery-image-placeholder {
+    width: 140px; /* ใหญ่ขึ้นเล็กน้อย */
+    height: 140px;
+}
+
+/* ==============================
+   Design Your Own Section
+   ============================== */
+.design-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* เพิ่ม gap ระหว่าง content กับ image */
+    align-items: flex-start;
+}
+
+.design-content {
+    flex: 2 1 60%; /* ให้ข้อความ 60% */
+    min-width: 320px; /* ปรับ min-width */
+    order: 1; /* ข้อความมาก่อน (ซ้าย) */
+}
+
+.design-inputs {
+    margin-bottom: 30px; /* เพิ่มระยะห่าง */
+    width: 100%;
+}
+.design-inputs .line {
+    width: 85%; /* ปรับความยาวเส้น */
+    margin-left: 0;
+    margin-bottom: 25px; /* เพิ่มระยะห่างระหว่างเส้น */
+    background-color: #ced4da; /* สีเข้มขึ้นเล็กน้อย */
+}
+
+.design-description {
+    margin-top: 20px;
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.8; /* เพิ่ม line-height เฉพาะส่วนนี้ */
+}
+.design-description p {
+    margin-bottom: 15px;
+}
+.design-description strong {
+    color: #c82333; /* สีแดงเข้ม */
+    font-weight: 600;
+}
+
+.design-image-container {
+    flex: 1 1 35%; /* ให้รูปประมาณ 35% */
+    min-width: 220px; /* ปรับ min-width */
+    order: 2; /* รูปมาทีหลัง (ขวา) */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* จัดกลางแนวตั้งใน container */
+    padding-top: 10px; /* เพิ่ม padding บนเล็กน้อยเพื่อให้สมดุล */
+}
+
+.design-image-placeholder {
+    width: 200px; /* ใหญ่ขึ้น */
+    height: 200px;
+    /* Inherit styles from .placeholder-box */
+}
+
+/* ==============================
+   Footer
+   ============================== */
+.site-footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    padding: 60px 30px 40px; /* เพิ่ม padding บน */
+    border-top: 4px solid #007bff; /* เส้นหนาขึ้น */
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-align: center;
+}
+
+.footer-section {
+    margin-bottom: 40px;
+}
+.footer-section:last-child {
+    margin-bottom: 0;
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #ced4da; /* สีสว่างขึ้นเล็กน้อย */
+    border-bottom: 1px solid #495057;
+    padding-bottom: 10px;
+    font-weight: 500;
+}
+
+.footer-section p {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #e9ecef; /* สีสว่างขึ้น */
+}
+
+.map-link {
+    color: #20c997; /* เปลี่ยนเป็นสีเขียวอมฟ้า */
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+    font-weight: 500;
+}
+.map-link:hover, .map-link:focus {
+    color: #5ff3c7;
+    text-decoration: underline;
+    outline: none;
+}
+
+/* Hide the decorative line under address */
+.address-line {
+   display: none;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* เพิ่มระยะห่าง */
+    font-size: 1rem;
+}
+
+.contact-label {
+    border: none; /* เอา border ออก */
+    border-radius: 8px; /* ทำให้เป็นสี่เหลี่ยมมน */
+    width: 45px;
+    height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff; /* ตัวหนังสือขาว */
+    background-color: #6c757d; /* พื้นหลังเทา */
+    margin-right: 18px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+.contact-item:hover .contact-label {
+    background-color: #495057; /* เข้มขึ้นเมื่อ hover */
+}
+
+.contact-link, .contact-info-text {
+    flex-grow: 1;
+    color: #dee2e6;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+.contact-link {
+    font-weight: 500;
+}
+.contact-link:hover, .contact-link:focus {
+    color: #fff;
+    text-decoration: underline;
+    outline: none;
+}
+.contact-info-text {
+    font-style: italic;
+    opacity: 0.8;
+}
+/* Specific link styles in Footer */
+.contact-item a[href^="mailto:"] { color: #ffc107; }
+.contact-item a[href^="mailto:"]:hover,
+.contact-item a[href^="mailto:"]:focus { color: #ffe082; }
+
+.contact-item a[href*="facebook.com"] { color: #17a2b8; }
+.contact-item a[href*="facebook.com"]:hover,
+.contact-item a[href*="facebook.com"]:focus { color: #4fe3ff; }
+
+.contact-item a[href^="tel:"] { color: #28a745; }
+.contact-item a[href^="tel:"]:hover,
+.contact-item a[href^="tel:"]:focus { color: #5ee08a; }
+
+.contact-item .contact-label-mail { background-color: #6f42c1; } /* Purple */
+.contact-item .contact-label-fb   { background-color: #0d6efd; } /* Blue */
+.contact-item .contact-label-line { background-color: #198754; } /* Green */
+.contact-item .contact-label-tel  { background-color: #fd7e14; } /* Orange */
+
+.contact-item:hover .contact-label-mail { background-color: #5a349c; }
+.contact-item:hover .contact-label-fb   { background-color: #0a58ca; }
+.contact-item:hover .contact-label-line { background-color: #146c43; }
+.contact-item:hover .contact-label-tel  { background-color: #c7630b; }
+
+/* Hide the placeholder lines */
+.contact-detail-line {
+    display: none;
+}
+
+/* ==============================
+   Responsive Design
+   ============================== */
+@media (max-width: 992px) {
+     .site-content {
+         padding: 40px 25px;
+     }
+     h2 { font-size: 1.8rem; }
+     h3 { font-size: 1.5rem; }
+
+     .image-gallery { gap: 15px; }
+     .gallery-image-placeholder { width: 120px; height: 120px; }
+}
+
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    .header-image-placeholder {
+        width: 90px;
+        height: 50px;
+    }
+    .menu-toggle {
+        margin-right: 15px;
+        font-size: 1.7rem;
+    }
+
+    /* Stack gallery images */
+    .gallery-image-placeholder {
+        width: calc(50% - 10px); /* 2 per row */
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    /* Stack design section */
+    .design-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px; /* ลด gap เมื่อ stack */
+    }
+    .design-content,
+    .design-image-container {
+        flex-basis: auto;
+        width: 100%;
+        order: 0; /* Reset order */
+    }
+     .design-content { text-align: center; }
+     .design-inputs .line {
+         width: 90%;
+         margin-left: auto;
+         margin-right: auto;
+     }
+     .design-description { text-align: left; margin-top: 25px;}
+     .design-image-container {
+        margin-top: 0; /* ไม่มี margin top เพราะใช้ gap แทน */
+        padding-top: 0;
+     }
+     .design-image-placeholder {
+        width: 180px; /* อาจจะลดขนาดเล็กน้อย */
+        height: 180px;
+    }
+
+    .intro-text p { font-size: 1.05rem; }
+    .intro-text .quote { font-size: 1.15rem; }
+
+    .footer-title { font-size: 1.6rem; }
+    .footer-section h3 { font-size: 1.2rem; }
+     .footer-section p, .contact-item { font-size: 0.95rem; }
+     .contact-label { width: 40px; height: 40px; font-size: 0.7rem; margin-right: 15px;}
+}
+
+@media (max-width: 480px) {
+    /* ซ่อนชื่อเว็บ หรือทำให้เล็กลงมาก */
+     .site-title {
+         font-size: 1.2rem;
+         font-weight: 600;
+         letter-spacing: 0.5px;
+         /* หรือ display: none; */
+     }
+     .header-image-placeholder { width: 70px; height: 40px; margin-left: 10px;}
+
+    .site-content { padding: 30px 15px; } /* ลด padding อีก */
+
+    /* ให้ gallery เป็น 1 รูปต่อแถว */
+    .gallery-image-placeholder { width: 80%; margin: 0 auto 15px; /* จัดกลาง */ }
+    .image-gallery { justify-content: center; gap: 10px; }
+
+
+    h2 { font-size: 1.5rem; margin-bottom: 25px; padding-bottom: 8px; }
+    h3 { font-size: 1.3rem; margin-bottom: 20px; }
+
+     .intro-text p { font-size: 1rem; }
+     .intro-text .quote { font-size: 1.1rem; }
+
+     .contact-label { width: 35px; height: 35px; font-size: 0.65rem;}
+     .contact-item { align-items: flex-start; /* จัดชิดบนบนจอเล็กมาก */}
+     .contact-label { margin-top: 3px;}
+}
