@@ -1,563 +1,567 @@
-/* style.css - ฉบับปรับปรุงล่าสุด */
+/* --- General Styles & Variables --- */
+:root {
+    --primary-bg: #ffffff;
+    --primary-text: #1a1a1a;
+    --secondary-bg: #f4f4f4;
+    --border-color: #e0e0e0;
+    --accent-color: #007bff; /* Example accent color */
+    --placeholder-bg: #e9ecef;
+    --placeholder-text: #6c757d;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --menu-bg: #f8f9fa;
+    --menu-text: #343a40;
+    --icon-color: #495057;
 
-/* ==============================
-   พื้นฐานและ Body
-   ============================== */
-   * {
+    --scroll-arrow-bg: rgba(255, 255, 255, 0.8);
+    --scroll-arrow-color: #333;
+    --lightbox-bg: rgba(0, 0, 0, 0.85); /* Background for lightbox */
+    --lightbox-close-color: #f1f1f1;
+}
+
+body.dark-mode {
+    --primary-bg: #1a1a1a;
+    --primary-text: #e0e0e0;
+    --secondary-bg: #2c2c2c;
+    --border-color: #444444;
+    --accent-color: #4dabf7; /* Lighter accent for dark mode */
+    --placeholder-bg: #3a3a3a;
+    --placeholder-text: #adb5bd;
+    --shadow-light: rgba(255, 255, 255, 0.1);
+    --menu-bg: #212529;
+    --menu-text: #f8f9fa;
+    --icon-color: #ced4da;
+
+    --scroll-arrow-bg: rgba(40, 40, 40, 0.8);
+    --scroll-arrow-color: #eee;
+    --lightbox-bg: rgba(0, 0, 0, 0.9);
+    --lightbox-close-color: #f1f1f1;
+}
+
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 html {
-    scroll-behavior: smooth; /* ทำให้การเลื่อนด้วย #link นุ่มนวล */
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
 }
 
 body {
-    font-family: 'Tahoma', 'Kanit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.7;
-    color: #343a40;
-    background-color: #fff;
-    position: relative;
-    overflow-x: hidden; /* ป้องกัน scroll แนวนอนจาก sidebar */
+    font-family: 'Kanit', sans-serif; /* Using Kanit font */
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden; /* Prevent horizontal scroll on body */
 }
 
-/* ==============================
-   Sidebar Navigation & Overlay
-   ============================== */
-.sidebar-nav {
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    margin-bottom: 0.8em;
+    color: var(--primary-text);
+}
+
+h1.logo a {
+    color: inherit; /* Logo text color matches body */
+    text-decoration: none;
+}
+
+h1.logo a:hover {
+    text-decoration: none;
+}
+
+
+p {
+    margin-bottom: 1em;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 1em 0 1em 2em;
+    padding-left: 1em;
+    border-left: 3px solid var(--accent-color);
+    color: var(--placeholder-text);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Header --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--secondary-bg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky; /* Make header sticky */
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin: 0;
+    flex-grow: 1; /* Allow logo to take space */
+    text-align: center; /* Center logo text */
+}
+
+.menu-toggle-btn,
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--icon-color);
+    padding: 0.5rem;
+    line-height: 1; /* Prevent extra spacing */
+    transition: color 0.3s ease;
+}
+
+.menu-toggle-btn:hover,
+.theme-toggle-btn:hover {
+    color: var(--accent-color);
+}
+
+/* --- Side Navigation Menu --- */
+.side-menu {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 260px; /* ขยายเล็กน้อย */
+    left: -300px; /* Start off-screen */
+    width: 280px;
     height: 100vh;
-    background-color: #f8f9fa;
-    border-right: 1px solid #dee2e6;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1100; /* อยู่บนสุด */
-    padding-top: 15px;
-    box-shadow: 3px 0 6px rgba(0,0,0,0.1); /* เงาชัดขึ้น */
+    background-color: var(--menu-bg);
+    padding: 4rem 1.5rem 1.5rem; /* More top padding for close button */
+    box-shadow: 2px 0 5px var(--shadow-light);
+    transition: left 0.3s ease-in-out, background-color 0.3s ease;
+    z-index: 1100;
+    overflow-y: auto;
 }
 
-.sidebar-nav.is-open {
-    transform: translateX(0);
+.side-menu.open {
+    left: 0; /* Slide in */
 }
 
-.menu-header {
-    font-weight: 600;
-    padding: 12px 20px;
-    font-size: 1.15rem;
-    border-bottom: 1px solid #e9ecef;
-    margin-bottom: 10px;
-    text-align: center;
-    color: #495057;
+.menu-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--menu-text);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+.menu-close-btn:hover {
+    color: var(--accent-color);
 }
 
-.sidebar-nav ul {
+.side-menu ul {
     list-style: none;
 }
 
-.sidebar-nav li {
-    border-bottom: 1px solid #e9ecef;
-}
-.sidebar-nav li:last-child {
-    border-bottom: none;
+.side-menu li {
+    margin-bottom: 1rem;
 }
 
-.sidebar-nav a {
-    display: block;
-    padding: 13px 25px; /* เพิ่ม padding */
+.side-menu a {
+    color: var(--menu-text);
     text-decoration: none;
-    color: #495057;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
+    display: block;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
 }
 
-.sidebar-nav a:hover,
-.sidebar-nav a:focus { /* เพิ่ม focus state */
-    background-color: #e9ecef;
-    color: #0056b3;
-    outline: none; /* เอา outline เริ่มต้นออก */
+.side-menu a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* เข้มขึ้นอีก */
-    z-index: 1050; /* ต่ำกว่า sidebar */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.overlay.is-visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ==============================
-   Main Container & Header
-   ============================== */
-.main-container {
-    padding-left: 0;
-    transition: padding-left 0.3s ease-in-out; /* หากต้องการให้เนื้อหาขยับ */
-}
-
-.site-header {
-    display: flex;
-    align-items: center;
-    padding: 12px 25px;
-    border-bottom: 1px solid #dee2e6;
-    background-color: #ffffff;
-    min-height: 70px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* เพิ่มเงาเล็กน้อยให้ header */
-}
-
-.menu-toggle {
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    margin-right: 20px;
-    color: #343a40;
-    padding: 5px;
-    line-height: 1;
-    transition: color 0.2s ease;
-}
-.menu-toggle:hover {
-    color: #007bff;
-}
-
-.site-title {
-    font-size: 1.7rem;
-    font-weight: 700;
-    margin-right: auto;
-    letter-spacing: 2px;
-    color: #212529;
-    white-space: nowrap; /* ไม่ให้ชื่อเว็บตัดบรรทัด */
-}
-
-.header-image-placeholder {
-    width: 110px;
-    height: 55px;
-    margin-left: 20px;
-    flex-shrink: 0; /* ไม่ให้หดเมื่อพื้นที่น้อย */
-}
-
-/* ==============================
-   Placeholder Box Style
-   ============================== */
-.placeholder-box {
-    border: 2px dashed #ced4da;
-    background-color: #f8f9fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9em;
-    color: #6c757d;
-    text-align: center;
-    border-radius: 4px;
-}
-.placeholder-box span {
-    opacity: 0.8;
-}
-
-
-/* ==============================
-   General Content & Headings
-   ============================== */
-.site-content {
-    padding: 50px 30px; /* เพิ่ม padding */
-    max-width: 1140px; /* กว้างขึ้นเล็กน้อย */
-    margin: 0 auto;
+/* --- Main Content --- */
+main {
+    padding: 1.5rem;
+    max-width: 1200px; /* Limit content width on large screens */
+    margin: 0 auto; /* Center content */
 }
 
 .content-section {
-    margin-bottom: 60px;
-    padding-top: 10px;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+    /* Add padding-top to account for sticky header height */
+    padding-top: 80px; /* Adjust as needed based on header height */
+    margin-top: -70px; /* Negative margin to pull section up */
 }
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 35px; /* เพิ่มระยะห่าง */
-    font-weight: 600;
-    color: #343a40;
-    border-bottom: 2px solid #007bff; /* เปลี่ยนสีเส้นใต้เป็นสี primary */
-    padding-bottom: 12px;
-    width: 100%;
+.content-section:first-child {
+    padding-top: 2rem; /* Reset padding for the very first section if needed */
+     margin-top: 0;
 }
-
-h3 {
-    font-size: 1.6rem; /* ใหญ่ขึ้น */
-    margin-bottom: 25px;
-    font-weight: 600;
-    color: #495057;
-}
-
-.line {
-    height: 1px;
-    background-color: #e0e0e0; /* สีจางลง */
-    margin: 20px 0; /* เพิ่มระยะห่าง */
-    width: 100%;
-}
-
-/* ==============================
-   Intro Text Section
-   ============================== */
-.intro-text {
+.content-section:last-child {
     border-bottom: none;
-    margin-bottom: 60px; /* เพิ่มระยะห่าง */
-    padding-top: 0;
-    text-align: center;
-}
-.intro-text p {
-    font-size: 1.1rem;
-    color: #495057; /* ปรับสีให้อ่านง่าย */
-    margin-bottom: 20px;
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.intro-text .quote {
-    font-style: italic;
-    font-weight: 500;
-    color: #0056b3; /* สีเข้มขึ้น */
-    margin-top: 30px;
-    font-size: 1.25rem; /* ใหญ่ขึ้นเล็กน้อย */
-    padding: 15px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    display: inline-block;
 }
 
-/* ==============================
-   All Products Section
-   ============================== */
-#all-products h2 { /* ไม่ต้องมีเส้นใต้ h2 ถ้า section มี item ย่อยๆ */
-     /* border-bottom: none; */
-     /* padding-bottom: 0; */
+/* --- Intro & Design Sections Layout --- */
+.intro-section,
+.design-section {
+    display: flex;
+    flex-direction: column; /* Stack text and image on small screens */
+    gap: 2rem;
+    align-items: center;
+}
+
+.intro-section .text-content,
+.design-section .text-content {
+    flex: 1; /* Allow text to take available space */
+}
+
+.placeholder-img {
+    background-color: var(--placeholder-bg);
+    color: var(--placeholder-text);
+    /* border: 1px dashed var(--border-color); */ /* Removed dashed border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px; /* Minimum height */
+    width: 100%; /* Full width on small screens */
+    max-width: 400px; /* Max width for the image */
+    border-radius: 8px;
+    overflow: hidden; /* Ensure image stays within border radius */
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.placeholder-img img {
+    object-fit: cover; /* Cover the area */
+    width: 100%;
+    height: 100%;
+}
+
+
+.recommended-img {
+    flex-shrink: 0; /* Prevent image placeholder from shrinking too much */
+}
+
+
+/* --- Product Rows --- */
+.product-row {
+    margin-bottom: 2rem;
+}
+
+.product-scroll-container {
+    position: relative; /* Needed for absolute positioning of arrows */
+    margin-bottom: 0.5rem; /* Space before the hint */
+}
+
+.product-scroll {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling with buttons */
+    gap: 1rem; /* Space between items */
+    padding: 1rem 0.5rem; /* Padding for items */
+    /* Hide scrollbar visually (optional, works on WebKit/Blink) */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.product-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .product-item {
-    margin-bottom: 45px;
-    padding-bottom: 25px;
-    border-bottom: 1px dashed #dee2e6; /* เส้นประชัดขึ้น */
-}
-.product-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0; /* item สุดท้ายไม่มี margin ล่าง */
-}
-
-.product-description {
-    color: #6c757d;
-    margin-bottom: 20px;
-    font-style: italic;
-    font-size: 0.95rem;
-}
-
-.image-gallery {
-    display: flex;
-    gap: 20px; /* เพิ่ม gap */
-    flex-wrap: wrap;
-}
-
-.gallery-image-placeholder {
-    width: 140px; /* ใหญ่ขึ้นเล็กน้อย */
-    height: 140px;
-}
-
-/* ==============================
-   Design Your Own Section
-   ============================== */
-.design-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px; /* เพิ่ม gap ระหว่าง content กับ image */
-    align-items: flex-start;
-}
-
-.design-content {
-    flex: 2 1 60%; /* ให้ข้อความ 60% */
-    min-width: 320px; /* ปรับ min-width */
-    order: 1; /* ข้อความมาก่อน (ซ้าย) */
-}
-
-.design-inputs {
-    margin-bottom: 30px; /* เพิ่มระยะห่าง */
-    width: 100%;
-}
-.design-inputs .line {
-    width: 85%; /* ปรับความยาวเส้น */
-    margin-left: 0;
-    margin-bottom: 25px; /* เพิ่มระยะห่างระหว่างเส้น */
-    background-color: #ced4da; /* สีเข้มขึ้นเล็กน้อย */
-}
-
-.design-description {
-    margin-top: 20px;
-    font-size: 1.05rem;
-    color: #555;
-    line-height: 1.8; /* เพิ่ม line-height เฉพาะส่วนนี้ */
-}
-.design-description p {
-    margin-bottom: 15px;
-}
-.design-description strong {
-    color: #c82333; /* สีแดงเข้ม */
-    font-weight: 600;
-}
-
-.design-image-container {
-    flex: 1 1 35%; /* ให้รูปประมาณ 35% */
-    min-width: 220px; /* ปรับ min-width */
-    order: 2; /* รูปมาทีหลัง (ขวา) */
+    flex: 0 0 auto; /* Prevent items from shrinking */
+    width: 150px; /* Fixed width for each item */
+    height: 150px;
+    background-color: var(--placeholder-bg);
+    border: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
-    align-items: center; /* จัดกลางแนวตั้งใน container */
-    padding-top: 10px; /* เพิ่ม padding บนเล็กน้อยเพื่อให้สมดุล */
-}
-
-.design-image-placeholder {
-    width: 200px; /* ใหญ่ขึ้น */
-    height: 200px;
-    /* Inherit styles from .placeholder-box */
-}
-
-/* ==============================
-   Footer
-   ============================== */
-.site-footer {
-    background-color: #343a40;
-    color: #f8f9fa;
-    padding: 60px 30px 40px; /* เพิ่ม padding บน */
-    border-top: 4px solid #007bff; /* เส้นหนาขึ้น */
-}
-
-.footer-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-    color: #fff;
+    align-items: center;
+    border-radius: 8px;
     text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer; /* Hint that it might be clickable */
+    overflow: hidden; /* Ensure image is contained */
+}
+.product-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the item area */
+    transition: transform 0.3s ease;
 }
 
-.footer-section {
-    margin-bottom: 40px;
+.product-item:hover {
+    box-shadow: 0 4px 8px var(--shadow-light);
+    border-color: var(--accent-color);
+    transform: translateY(-3px); /* Slight lift effect */
 }
-.footer-section:last-child {
-    margin-bottom: 0;
-}
-
-.footer-section h3 {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    color: #ced4da; /* สีสว่างขึ้นเล็กน้อย */
-    border-bottom: 1px solid #495057;
-    padding-bottom: 10px;
-    font-weight: 500;
+.product-item:hover img {
+     transform: scale(1.05); /* Slightly zoom image on hover */
 }
 
-.footer-section p {
-    margin-bottom: 12px;
+
+.scroll-hint {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--placeholder-text);
+    margin-top: 0.5rem;
+}
+
+/* Scroll Arrows */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--scroll-arrow-bg);
+    border: 1px solid var(--border-color);
+    color: var(--scroll-arrow-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     font-size: 1rem;
-    color: #e9ecef; /* สีสว่างขึ้น */
-}
-
-.map-link {
-    color: #20c997; /* เปลี่ยนเป็นสีเขียวอมฟ้า */
-    text-decoration: none;
-    transition: color 0.2s ease, text-decoration 0.2s ease;
-    font-weight: 500;
-}
-.map-link:hover, .map-link:focus {
-    color: #5ff3c7;
-    text-decoration: underline;
-    outline: none;
-}
-
-/* Hide the decorative line under address */
-.address-line {
-   display: none;
-}
-
-.contact-item {
+    cursor: pointer;
+    z-index: 10;
     display: flex;
-    align-items: center;
-    margin-bottom: 20px; /* เพิ่มระยะห่าง */
-    font-size: 1rem;
-}
-
-.contact-label {
-    border: none; /* เอา border ออก */
-    border-radius: 8px; /* ทำให้เป็นสี่เหลี่ยมมน */
-    width: 45px;
-    height: 45px;
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #ffffff; /* ตัวหนังสือขาว */
-    background-color: #6c757d; /* พื้นหลังเทา */
-    margin-right: 18px;
-    flex-shrink: 0;
-    text-transform: uppercase;
-    transition: background-color 0.2s ease;
+    align-items: center;
+    box-shadow: 0 1px 3px var(--shadow-light);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7; /* Slightly transparent */
 }
-.contact-item:hover .contact-label {
-    background-color: #495057; /* เข้มขึ้นเมื่อ hover */
+.scroll-btn:hover {
+    opacity: 1;
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+.scroll-btn.prev {
+    left: -15px; /* Position outside the container slightly */
+}
+.scroll-btn.next {
+    right: -15px;
+}
+/* Hide arrows on touch devices or when not needed (JS can handle this better) */
+@media (hover: none) {
+    .scroll-btn {
+        opacity: 0.5; /* Make less prominent */
+    }
 }
 
-.contact-link, .contact-info-text {
-    flex-grow: 1;
-    color: #dee2e6;
-    transition: color 0.2s ease;
+/* Styles for when scrolling is not needed (Added) */
+.product-scroll-container.no-scroll .product-scroll {
+    overflow-x: hidden; /* Disable scrolling */
+    /* Optional: Center items if they don't fill the container */
+    /* justify-content: center; */
+    /* Optional: Add padding so centered items don't touch edges */
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.product-scroll-container.no-scroll .scroll-btn {
+    display: none; /* Hide scroll buttons */
+}
+.product-scroll-container.no-scroll .scroll-hint {
+    display: none; /* Hide the scroll hint */
+}
+
+
+/* --- Footer --- */
+.main-footer {
+    background-color: var(--secondary-bg);
+    color: var(--primary-text);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.main-footer h3 {
+    margin-bottom: 0.5rem;
+}
+
+.main-footer p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.contact-icons {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-icons a {
+    color: var(--icon-color);
+    font-size: 1.8rem; /* Icon size */
+    margin: 0 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.contact-icons a:hover {
+    color: var(--accent-color);
     text-decoration: none;
 }
-.contact-link {
-    font-weight: 500;
-}
-.contact-link:hover, .contact-link:focus {
-    color: #fff;
-    text-decoration: underline;
-    outline: none;
-}
-.contact-info-text {
-    font-style: italic;
-    opacity: 0.8;
-}
-/* Specific link styles in Footer */
-.contact-item a[href^="mailto:"] { color: #ffc107; }
-.contact-item a[href^="mailto:"]:hover,
-.contact-item a[href^="mailto:"]:focus { color: #ffe082; }
 
-.contact-item a[href*="facebook.com"] { color: #17a2b8; }
-.contact-item a[href*="facebook.com"]:hover,
-.contact-item a[href*="facebook.com"]:focus { color: #4fe3ff; }
-
-.contact-item a[href^="tel:"] { color: #28a745; }
-.contact-item a[href^="tel:"]:hover,
-.contact-item a[href^="tel:"]:focus { color: #5ee08a; }
-
-.contact-item .contact-label-mail { background-color: #6f42c1; } /* Purple */
-.contact-item .contact-label-fb   { background-color: #0d6efd; } /* Blue */
-.contact-item .contact-label-line { background-color: #198754; } /* Green */
-.contact-item .contact-label-tel  { background-color: #fd7e14; } /* Orange */
-
-.contact-item:hover .contact-label-mail { background-color: #5a349c; }
-.contact-item:hover .contact-label-fb   { background-color: #0a58ca; }
-.contact-item:hover .contact-label-line { background-color: #146c43; }
-.contact-item:hover .contact-label-tel  { background-color: #c7630b; }
-
-/* Hide the placeholder lines */
-.contact-detail-line {
-    display: none;
+.copyright {
+    font-size: 0.8rem;
+    color: var(--placeholder-text);
+    margin-top: 1.5rem;
 }
 
-/* ==============================
-   Responsive Design
-   ============================== */
-@media (max-width: 992px) {
-     .site-content {
-         padding: 40px 25px;
-     }
-     h2 { font-size: 1.8rem; }
-     h3 { font-size: 1.5rem; }
-
-     .image-gallery { gap: 15px; }
-     .gallery-image-placeholder { width: 120px; height: 120px; }
+/* --- Lightbox Styles (Added) --- */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1500; /* Ensure it's on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent scroll on the overlay itself */
+    background-color: var(--lightbox-bg);
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    padding: 20px; /* Add some padding */
+    cursor: pointer; /* Indicate background is clickable */
+    transition: opacity 0.3s ease;
+    opacity: 0; /* Start transparent for fade-in */
 }
 
-@media (max-width: 768px) {
-    .site-title {
-        font-size: 1.5rem;
-        letter-spacing: 1px;
+.lightbox.active {
+    display: flex;
+    opacity: 1; /* Fade in */
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh; /* Limit height to viewport height */
+    animation: lightboxZoom 0.3s ease-out;
+    cursor: default; /* Default cursor for the image itself */
+    border-radius: 4px; /* Optional: slight rounding */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: var(--lightbox-close-color);
+    font-size: 45px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    cursor: pointer;
+    line-height: 1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+
+.lightbox-caption { /* Optional caption styling */
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* Lightbox Animation */
+@keyframes lightboxZoom {
+    from { transform: scale(0.8); opacity: 0.5; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+/* --- Responsive Design --- */
+
+/* Medium screens (tablets) */
+@media (min-width: 768px) {
+    .logo {
+        text-align: left; /* Align logo left */
+        flex-grow: 0; /* Don't let it grow excessively */
     }
-    .header-image-placeholder {
-        width: 90px;
-        height: 50px;
+    .main-header {
+        justify-content: space-between; /* Ensure space between items */
     }
-    .menu-toggle {
-        margin-right: 15px;
-        font-size: 1.7rem;
-    }
-
-    /* Stack gallery images */
-    .gallery-image-placeholder {
-        width: calc(50% - 10px); /* 2 per row */
-        height: auto;
-        aspect-ratio: 1 / 1;
-    }
-
-    /* Stack design section */
+    .intro-section,
     .design-section {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px; /* ลด gap เมื่อ stack */
+        flex-direction: row; /* Side-by-side layout */
+        text-align: left; /* Align text left */
+        align-items: flex-start; /* Align items top */
     }
-    .design-content,
-    .design-image-container {
-        flex-basis: auto;
-        width: 100%;
-        order: 0; /* Reset order */
+    .placeholder-img {
+        width: 40%; /* Adjust image width */
+        max-width: 350px;
     }
-     .design-content { text-align: center; }
-     .design-inputs .line {
-         width: 90%;
-         margin-left: auto;
-         margin-right: auto;
-     }
-     .design-description { text-align: left; margin-top: 25px;}
-     .design-image-container {
-        margin-top: 0; /* ไม่มี margin top เพราะใช้ gap แทน */
-        padding-top: 0;
-     }
-     .design-image-placeholder {
-        width: 180px; /* อาจจะลดขนาดเล็กน้อย */
+    .product-item {
+        width: 180px;
         height: 180px;
     }
-
-    .intro-text p { font-size: 1.05rem; }
-    .intro-text .quote { font-size: 1.15rem; }
-
-    .footer-title { font-size: 1.6rem; }
-    .footer-section h3 { font-size: 1.2rem; }
-     .footer-section p, .contact-item { font-size: 0.95rem; }
-     .contact-label { width: 40px; height: 40px; font-size: 0.7rem; margin-right: 15px;}
+    .scroll-btn.prev {
+        left: -20px;
+    }
+    .scroll-btn.next {
+        right: -20px;
+    }
 }
 
+/* Smaller screens (adjust product item size if needed) */
 @media (max-width: 480px) {
-    /* ซ่อนชื่อเว็บ หรือทำให้เล็กลงมาก */
-     .site-title {
-         font-size: 1.2rem;
-         font-weight: 600;
-         letter-spacing: 0.5px;
-         /* หรือ display: none; */
-     }
-     .header-image-placeholder { width: 70px; height: 40px; margin-left: 10px;}
-
-    .site-content { padding: 30px 15px; } /* ลด padding อีก */
-
-    /* ให้ gallery เป็น 1 รูปต่อแถว */
-    .gallery-image-placeholder { width: 80%; margin: 0 auto 15px; /* จัดกลาง */ }
-    .image-gallery { justify-content: center; gap: 10px; }
-
-
-    h2 { font-size: 1.5rem; margin-bottom: 25px; padding-bottom: 8px; }
-    h3 { font-size: 1.3rem; margin-bottom: 20px; }
-
-     .intro-text p { font-size: 1rem; }
-     .intro-text .quote { font-size: 1.1rem; }
-
-     .contact-label { width: 35px; height: 35px; font-size: 0.65rem;}
-     .contact-item { align-items: flex-start; /* จัดชิดบนบนจอเล็กมาก */}
-     .contact-label { margin-top: 3px;}
+    .logo {
+        font-size: 1.3rem;
+    }
+    .menu-toggle-btn,
+    .theme-toggle-btn {
+        font-size: 1.3rem;
+    }
+    .product-item {
+        width: 130px;
+        height: 130px;
+    }
+    .contact-icons a {
+        font-size: 1.6rem;
+        margin: 0 0.6rem;
+    }
+    .scroll-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+     .scroll-btn.prev {
+        left: -10px;
+    }
+    .scroll-btn.next {
+        right: -10px;
+    }
+    .lightbox-content {
+        max-width: 95%; /* Allow slightly larger image on small screens */
+    }
+    .lightbox-close {
+        font-size: 35px;
+        top: 10px;
+        right: 20px;
+    }
+    .content-section {
+        padding-top: 70px; /* Adjust for potentially smaller header */
+        margin-top: -60px;
+    }
 }

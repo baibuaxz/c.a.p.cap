@@ -3,126 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C.A.P. CAP - ผลิตหมวกโรงงาน หมวกเก็บผม</title> <!-- เพิ่ม Title ให้สื่อความหมาย -->
+    <title>C.A.P. CAP - Custom Hats</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts (Optional - Example) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar-nav" id="sidebar">
-        <div class="menu-header">เมนู</div>
+    <!-- Side Navigation Menu -->
+    <nav id="side-menu" class="side-menu">
+        <button id="menu-close" class="menu-close-btn" aria-label="Close Menu">×</button>
         <ul>
-            <li><a href="#top">C.A.P. CAP</a></li>
+            <li><a href="#home">C.A.P. CAP</a></li>
             <li><a href="#all-products">สินค้าทั้งหมด</a></li>
-            <li><a href="#design-own">ออกแบบหมวกเอง</a></li>
-            <li><a href="#address-footer">ที่อยู่</a></li>
-            <li><a href="#contact-footer">ช่องทางการติดต่อ</a></li>
+            <li><a href="#design-hat">ออกแบบหมวก</a></li>
+            <li><a href="#contact">ช่องทางการติดต่อ</a></li>
         </ul>
     </nav>
 
+    <!-- Main Header -->
+    <header class="main-header">
+        <button id="menu-toggle" class="menu-toggle-btn" aria-label="Open Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="logo"><a href="#home">C.A.P. CAP</a></h1>
+        <!-- Theme toggle button can be placed here or in the footer -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i class="fas fa-sun"></i> <!-- Initial icon -->
+        </button>
+    </header>
+
     <!-- Main Content Area -->
-    <div class="main-container">
-        <!-- Header -->
-        <header class="site-header" id="top">
-            <button class="menu-toggle" id="menu-toggle-btn">☰</button>
-            <h1 class="site-title">C.A.P. CAP</h1>
+    <main>
+        <!-- Introduction Section -->
+         <section id="intro" class="content-section intro-section">
+            <div class="text-content">
+                 <!-- Anchor point for home link -->
+                 <a id="home" style="display: block; position: relative; top: -70px; visibility: hidden;"></a>
+                <h2>เกี่ยวกับเรา</h2>
+                <p>เราคือผู้ผลิตและจัดจำหน่ายหมวกสำหรับโรงงานอุตสาหกรรม หมวกแก๊ป และอุปกรณ์สวมใส่เพื่อความสะอาดและความปลอดภัยในสายการผลิต ตอบโจทย์ทุกความต้องการ ไม่ว่าจะเป็นโรงงานอาหารหรือสุขอนามัย ต้องการควบคุมคุณภาพด้านสุขอนามัย</p>
+                <blockquote>"หมวกคุณภาพ เพื่อมาตรฐานโรงงานที่คุณมั่นใจ"</blockquote>
             </div>
-        </header>
+            <div class="placeholder-img recommended-img">
+                <img src="image/S__35741773.jpg" alt="ตัวอย่างหมวกหลากหลายแบบ">
+            </div>
+        </section>
 
-        <!-- Content Body -->
-        <main class="site-content">
-            <section class="intro-lines">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </section>
+        <!-- All Products Section -->
+        <section id="all-products" class="content-section">
+            <h2>สินค้าทั้งหมด</h2>
 
-            <!-- *** เนื้อหาส่วนแรกที่เพิ่มเข้ามา *** -->
-            <section class="intro-text content-section">
-                 <p>เราคือผู้ผลิตและจัดจำหน่ายหมวกสำหรับโรงงานอุตสาหกรรม หมวกเก็บผม และอุปกรณ์สวมใส่เพื่อความสะอาดและความปลอดภัยในสายการผลิต ตอบโจทย์ทุกความต้องการ ไม่ว่าจะเป็นโรงงานอาหารหรือธุรกิจที่ต้องการควบคุมมาตรฐานด้านสุขอนามัย</p>
-                 <p class="quote">“หมวกคุณภาพ เพื่อมาตรฐานโรงงานที่คุณมั่นใจ”</p>
-            </section>
-            <!-- *** จบส่วนแรก *** -->
-
-            <section id="all-products" class="content-section">
-                <h2>สินค้าทั้งหมด</h2>
-                <div class="product-item">
-                    <h3>ชื่อสินค้า 1</h3>
-                    <p class="product-description">(รายละเอียด รูป หรือ อะไรก็ว่าไป)</p>
-                    <div class="image-gallery">
-                        <div class="gallery-image-placeholder placeholder-box"> </div>
-                        <div class="gallery-image-placeholder placeholder-box"> </div>
-                        <div class="gallery-image-placeholder placeholder-box"></div>
+            <!-- Product Row 1 -->
+            <section class="product-row">
+                <h3>หมวกคุมตาข่ายบน</h3>
+                <div class="product-scroll-container">
+                     <button class="scroll-btn prev" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+                    <div class="product-scroll">
+                        <div class="product-item"><img src="image/S__35741734.jpg" alt="หมวกคุมตาข่ายบน แบบที่ 1"></div>
+                        <div class="product-item"><img src="image/S__35741736.jpg" alt="หมวกคุมตาข่ายบน แบบที่ 2"></div>
                     </div>
-                </div>
-                <div class="product-item">
-                    <h3>ชื่อสินค้า 2</h3>
-                     <div class="image-gallery">
-                        <div class="gallery-image-placeholder placeholder-box"></div>
-                        <div class="gallery-image-placeholder placeholder-box"></div>
-                        <div class="gallery-image-placeholder placeholder-box"></div>
-                    </div>
+                     <button class="scroll-btn next" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </section>
 
-            <section id="design-own" class="content-section design-section">
-                 <h2>ออกแบบหมวกของคุณเอง</h2>
-                 <div class="design-inputs">
-                     <div class="line"></div>
-                     <div class="line"></div>
-                     <div class="line"></div>
-                 </div>
-                 <div class="design-image-placeholder placeholder-box">
-                    <span>รูปภาพ</span>
-                 </div>
+            <!-- Product Row 2 -->
+            <section class="product-row">
+                <h3>หมวกแก๊ปตาข่ายท้ายทอย</h3>
+                 <div class="product-scroll-container">
+                     <button class="scroll-btn prev" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+                    <div class="product-scroll">
+                        <div class="product-item"><img src="image/S__35741739.jpg" alt="หมวกแก๊ปตาข่ายท้ายทอย แบบที่ 1"></div>
+                        <div class="product-item"><img src="image/S__35741741.jpg" alt="หมวกแก๊ปตาข่ายท้ายทอย แบบที่ 2"></div>
+                        <!-- Add more product items as needed -->
+                    </div>
+                    <button class="scroll-btn next" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
 
-                 <!-- *** เนื้อหาส่วนออกแบบหมวกที่เพิ่มเข้ามา *** -->
-                 <div class="design-description">
-                    <p>ผลิตหมวกโรงงานและหมวกเก็บผมตามแบบที่คุณต้องการ คุณสามารถร่วมออกแบบเลือกสี โลโก้ และรายละเอียดต่างๆ ได้เอง</p>
-                    <p>เราพร้อมให้คำปรึกษา และ ปรับแบบจนกว่าจะพอใจ</p>
-                    <p><strong>ติดต่อเราเพื่อสอบถามได้เลย</strong></p>
-                 </div>
-                 <!-- *** จบส่วนออกแบบหมวก *** -->
+            <!-- Product Row 3 -->
+            <section class="product-row">
+                <h3>หมวกแปดเหลี่ยมตาข่ายท้ายทอย</h3>
+                 <div class="product-scroll-container">
+                     <button class="scroll-btn prev" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+                    <div class="product-scroll">
+                        <div class="product-item"><img src="image/S__35741744.jpg" alt="หมวกแปดเหลี่ยมตาข่ายท้ายทอย แบบที่ 1"></div>
+                        <div class="product-item"><img src="image/S__36159629.jpg" alt="หมวกแปดเหลี่ยมตาข่ายท้ายทอย แบบที่ 2"></div>
+                        <!-- Add more product items as needed -->
+                    </div>
+                    <button class="scroll-btn next" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Product Row 4 -->
+            <section class="product-row">
+                <h3>หมวกคลุมบ่า</h3>
+                 <div class="product-scroll-container">
+                     <button class="scroll-btn prev" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+                    <div class="product-scroll">
+                        <div class="product-item"><img src="image/S__35741748.jpg" alt="หมวกคลุมบ่า แบบที่ 1"></div>
+                        <div class="product-item"><img src="image/S__35741750.jpg" alt="หมวกคลุมบ่า แบบที่ 2"></div>
+                        <!-- Add more product items as needed -->
+                    </div>
+                    <button class="scroll-btn next" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Product Row 5 -->
+            <section class="product-row">
+                <h3>เน็ตคลุมผม</h3>
+                 <div class="product-scroll-container">
+                     <button class="scroll-btn prev" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+                    <div class="product-scroll">
+                        <div class="product-item"><img src="image/S__35741761.jpg" alt="เน็ตคลุมผม สีดำ"></div>
+                        <div class="product-item"><img src="image/S__35741763.jpg" alt="เน็ตคลุมผม สีน้ำเงิน"></div>
+                        <div class="product-item"><img src="image/S__35741764.jpg" alt="เน็ตคลุมผม สีขาว"></div>
+                        <!-- Add more product items as needed -->
+                    </div>
+                    <button class="scroll-btn next" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Product Row 6 -->
+            <section class="product-row">
+                <h3>หมวกคลุมตาข่ายบนมีตาข่ายท้ายทอย</h3>
+                 <div class="product-scroll-container">
+                     <button class="scroll-btn prev" aria-label="Previous Products"><i class="fas fa-chevron-left"></i></button>
+                    <div class="product-scroll">
+                        <div class="product-item"><img src="image/S__35741752.jpg" alt="หมวกคลุมตาข่ายบนมีตาข่ายท้ายทอย แบบที่ 1"></div>
+                        <div class="product-item"><img src="image/S__35741755.jpg" alt="หมวกคลุมตาข่ายบนมีตาข่ายท้ายทอย แบบที่ 2"></div>
+                        <div class="product-item"><img src="image/S__35741756.jpg" alt="หมวกคลุมตาข่ายบนมีตาข่ายท้ายทอย แบบที่ 3"></div>
+                        <!-- Add more product items as needed -->
+                    </div>
+                    <button class="scroll-btn next" aria-label="Next Products"><i class="fas fa-chevron-right"></i></button>
+                </div>
 
             </section>
-        </main>
+        </section>
 
-        <!-- Footer -->
-        <footer class="site-footer">
-             <h2 class="footer-title">C.A.P. CAP</h2>
-             <div id="address-footer" class="footer-section">
-                 <h3>ที่อยู่</h3>
-                 <p>บริษัท ซี.เอ.พี. แคป จำกัด</p>
-                 <!-- *** อัปเดตที่อยู่และลิงก์แผนที่ *** -->
-                 <p><a href="https://maps.app.goo.gl/yXy6cSRh1qtn1DYj9?g_st=com.google.maps.preview.copy" target="_blank" rel="noopener noreferrer" class="map-link">110 ซ.สุขสวัสดิ์31/1 เขต ราษฏร์บูรณะ แขวง ราษฎร์บูรณะ กรุงเทพ 10140 (กดเพื่อดูแผนที่)</a></p>
-                 <div class="line address-line"></div> <!-- อาจจะไม่จำเป็นต้องมีเส้นนี้แล้ว -->
-             </div>
-             <div id="contact-footer" class="footer-section">
-                  <h3>ช่องทางการติดต่อ</h3>
-                  <!-- *** อัปเดตช่องทางการติดต่อ *** -->
-                  <div class="contact-item">
-                      <span class="contact-label">เมล</span>
-                      <a href="mailto:ccap@hotmail.co.th" class="contact-link">ccap@hotmail.co.th</a>
-                  </div>
-                   <div class="contact-item">
-                      <span class="contact-label">FB</span>
-                      <a href="https://www.facebook.com/share/1DqNFVe4ch/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="contact-link">คลิกเพื่อไปที่ Facebook Page</a>
-                  </div>
-                   <div class="contact-item">
-                      <span class="contact-label">Line</span>
-                      <!-- คุณอาจจะใส่ Line ID หรือข้อความเชิญชวนให้แอด -->
-                      <span class="contact-info-text">ติดต่อผ่าน Line (เพิ่ม ID หรือ QR Code)</span>
-                  </div>
-                   <div class="contact-item">
-                      <span class="contact-label">เบอร์</span>
-                      <a href="tel:0847511751" class="contact-link">084-751-1751</a>
-                  </div>
-             </div>
-        </footer>
-    </div><!-- end .main-container -->
+        <!-- Design Your Own Hat Section -->
+        <section id="design-hat" class="content-section design-section">
+             <div class="text-content">
+                <h2>ออกแบบหมวกของคุณเอง</h2>
+                <p>ผลิตหมวกโรงงานและหมวกแก๊ปตามแบบที่คุณต้องการ คุณสามารถร่วมออกแบบเลือกสี โลโก้ และรายละเอียดต่างๆ ได้เอง เราพร้อมให้คำปรึกษา และปรับแบบจนกว่าจะพอใจ</p>
+            </div>
+            <div class="placeholder-img recommended-img">
+                <img src="image\S__10166289.jpg" alt="ตัวอย่างการออกแบบหมวก">
+            </div>
+        </section>
+    </main>
 
-    <!-- Overlay for closing sidebar -->
-    <div class="overlay" id="overlay"></div>
+    <!-- Footer -->
+    <footer id="contact" class="main-footer">
+        <h3>C.A.P. CAP</h3>
+        <p>บริษัท ซี.เอ.พี. แคป จำกัด</p>
+        <p>110 ซ.สุขสวัสดิ์1/1 เขต ราษฎร์บูรณะ แขวง ราษฎร์บูรณะ กรุงเทพ 10140</p>
+        <div class="contact-icons">
+            <a href="https://www.facebook.com/share/1DqNFVe4ch/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fab fa-facebook-square"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/yXy6cSRh1qtn1DYj9?g_st=com.google.maps.preview.copy" target="_blank" rel="noopener noreferrer" aria-label="แผนที่">
+                <i class="fas fa-map-marker-alt"></i>
+            </a>
+            <a href="mailto:ccap@hotmail.co.th" aria-label="อีเมลล์">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="tel:0847511751" aria-label="เบอร์โทรศัพท์">
+                <i class="fas fa-phone-alt"></i>
+            </a>
+        </div>
+         <p class="copyright">© <span id="current-year"></span> C.A.P. CAP. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox Structure (Added) -->
+    <div id="lightbox" class="lightbox">
+        <span id="lightbox-close" class="lightbox-close">×</span>
+        <img class="lightbox-content" id="lightbox-img" alt="ขยายรูปภาพสินค้า">
+        <div id="lightbox-caption" class="lightbox-caption"></div> <!-- Optional: Add caption if needed -->
+    </div>
 
     <script src="script.js"></script>
 </body>
