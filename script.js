@@ -205,4 +205,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // window.addEventListener('hashchange', adjustScrollForHeader);
     // Note: The CSS padding-top/margin-top approach on .content-section is often simpler
 
-});
+
+    // --- Slideshow for Design Section (Added) ---
+    const designSlideshowImage = document.getElementById('design-slideshow-img');
+    if (designSlideshowImage) {
+        const designImages = [
+            'image/S__10166289.jpg', // รูปแรก (รูปเดิม)
+            'image/S__36159770.jpg', // << ใส่ path รูปที่ 2 ที่นี่ (ตัวอย่าง)
+            'image/S__68329499.jpg', // << ใส่ path รูปที่ 3 ที่นี่ (ตัวอย่าง)
+            // เพิ่ม path รูปอื่นๆ ที่ต้องการสลับ ได้ตามต้องการ
+            // เช่น 'image/another-design-example.jpg',
+        ];
+        let currentDesignImageIndex = 0;
+        const slideInterval = 4000; // เปลี่ยนรูปทุกๆ 4000 มิลลิวินาที (4 วินาที)
+
+        // เพิ่ม CSS transition เพื่อให้ดูนุ่มนวลขึ้น (Optional)
+        designSlideshowImage.style.transition = 'opacity 0.5s ease-in-out';
+
+        setInterval(() => {
+            currentDesignImageIndex = (currentDesignImageIndex + 1) % designImages.length; // วนกลับไปรูปแรก
+
+            // ทำให้รูปจางลงก่อนเปลี่ยน (Optional fade effect)
+            designSlideshowImage.style.opacity = 0;
+
+            // รอให้ fade out เสร็จแล้วค่อยเปลี่ยนรูปและ fade in
+            setTimeout(() => {
+                designSlideshowImage.src = designImages[currentDesignImageIndex];
+                designSlideshowImage.alt = `ตัวอย่างการออกแบบหมวก ${currentDesignImageIndex + 1}`; // อัปเดต alt text (ดีต่อ SEO)
+                designSlideshowImage.style.opacity = 1; // ทำให้รูปแสดงขึ้น
+            }, 500); // รอ 0.5 วินาที (เท่ากับ transition duration)
+
+        }, slideInterval);
+    }
+    // --- End of Slideshow Code ---
+
+}); // <-- End of DOMContentLoaded listener
